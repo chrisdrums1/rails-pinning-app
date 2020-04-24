@@ -50,6 +50,8 @@ group :development, :test do
   gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 end
 
+gem 'rails_12factor'
+
 group :test do
   gem 'database_cleaner'
 end
