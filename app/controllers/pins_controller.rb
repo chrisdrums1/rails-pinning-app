@@ -19,8 +19,9 @@ class PinsController < ApplicationController
 
   def create
     @pin = Pin.create(pin_params)
-    if @pin.valid? && @pin.save
-      render :show
+    if @pin.valid?
+      @pin.save
+      redirect_to @pin
     else
       render :new
     end

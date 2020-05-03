@@ -38,7 +38,7 @@ RSpec.describe PinsController do
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails"}
+        category_id: "rails"}
     end
 
     after(:each) do
@@ -49,17 +49,17 @@ RSpec.describe PinsController do
     end
 
     it 'responds with a redirect' do
-      post :create, pin: @pin_hash
+      post :create, params: { pin: @pin_hash}
       expect(response.redirect?).to be(true)
     end
 
     it 'creates a pin' do
-      post :create, pin: @pin_hash
+      post :create, params: { pin: @pin_hash}
       expect(Pin.find_by_slug("rails-wizard").present?).to be(true)
     end
 
     it 'redirects to the show view' do
-      post :create, pin: @pin_hash
+      post :create, params: { pin: @pin_hash}
       expect(response).to redirect_to(pin_url(assigns(:pin)))
     end
 
@@ -68,7 +68,7 @@ RSpec.describe PinsController do
       # delete the title from the @pin_hash in order
       # to test what happens with invalid parameters
       @pin_hash.delete(:title)
-      post :create, pin: @pin_hash
+      post :create, params: { pin: @pin_hash}
       expect(response).to render_template(:new)
     end
 
@@ -77,7 +77,7 @@ RSpec.describe PinsController do
       # delete the title from the @pin_hash in order
       # to test what happens with invalid parameters
       @pin_hash.delete(:title)
-      post :create, pin: @pin_hash
+      post :create, params: { pin: @pin_hash}
       expect(assigns[:errors].present?).to be(true)
     end
 
