@@ -33,12 +33,13 @@ RSpec.describe PinsController do
 
   describe "POST create" do
     before(:each) do
+
       @pin_hash = {
         title: "Rails Wizard",
         url: "http://railswizard.org",
         slug: "rails-wizard",
         text: "A fun and helpful Rails Resource",
-        category_id: "rails"}
+        category_id: Category.find_by(name: "rails").id}
     end
 
     after(:each) do

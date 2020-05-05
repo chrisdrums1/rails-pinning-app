@@ -23,6 +23,7 @@ class PinsController < ApplicationController
       @pin.save
       redirect_to @pin
     else
+      @errors = @pin.errors
       render :new
     end
   end
